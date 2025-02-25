@@ -50,11 +50,11 @@ static void pool_lights_set_color() {
 }
 
 void pool_lights_init() {
-    timer_set_repeating(100, pool_lights_set_color);
     set_sys_clock_khz(128000, false);
     uint offset = pio_add_program(pio, &pio_matrix_program);
     sm = pio_claim_unused_sm(pio, true);
     pio_matrix_program_init(pio, sm, offset, LIGHTS_PIN);
+    timer_set_repeating(100, pool_lights_set_color);
 }
 
 void pool_lights_set_status(bool status) {
